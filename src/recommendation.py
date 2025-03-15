@@ -1,11 +1,10 @@
 from constraint import Problem
-from data_processing import get_label_encoders
+from src.data_processing import get_label_encoders
 
 class CSP_Recommendation:
     """
     Sistema di raccomandazione basato su Constraint Satisfaction Problem.
-    """
-    
+    """    
     def __init__(self, family_history):
         self._problem = Problem()
         self._obesity_goal_level = 1
@@ -147,8 +146,8 @@ if __name__ == "__main__":
     
     # Esempio di utilizzo
     from sklearn.model_selection import train_test_split
-    from data_processing import discretize_features
-    from belief_network import BeliefNetwork
+    from src.data_processing import discretize_features
+    from src.belief_network import BeliefNetwork
     import pandas as pd
     
     # Apprendimento BN per la valutazione delle raccomandazioni
