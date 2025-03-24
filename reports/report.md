@@ -109,8 +109,8 @@ In totale, il dataset contiene 17 feature, ognuna delle quali rappresenta una ca
 | Obesity_Level (Feature Target) | Insufficient_Weight / Normal_Weight / Overweight_Level_I / Overweight_Level_II / Obesity_Type_I / Obesity_Type_II / Obesity_Type_III |
 
 **Osservazioni:** dal dataset che si trova su Kaggle, rispetto alle informazioni del paper, possiamo osservare che:
-- Le feature "Age", "FCVC", "NCP", "CH2O", "FAF" e "TUE" risultano essere float invece che interi, questo problema è dato dal fatto che il 77% dei dati è stato generato sinteticamente utilizzando lo strumento Weka e il filtro SMOTE, quindi è necessario una operazione di arrotondamento per difetto dei valori di queste feature.
-- Inoltre le feature "CH2O", "FAF" e "TUE" secondo il seguente paper non dovrebbero essere valori interi ma categorici, quindi è necessario trattarli come tali.
+- Le feature "Age", "FCVC", "NCP", "CH2O", "FAF" e "TUE" risultano essere float invece che interi, questo problema è dato dal fatto che il 77% dei dati è stato generato sinteticamente utilizzando lo strumento Weka e il filtro SMOTE, quindi è necessario una operazione di arrotondamento per difetto dei valori di queste feature;
+- Le feature "FCVC", "NCP", "CH2O", "FAF" e "TUE" secondo il paper non dovrebbero essere valori interi ma categorici, quindi è necessario trattarli come tali;
 - Le restanti feature sono categoriche, per cui sono necessarie operazioni di Encoding per mapparle a valori interi per poter essere utilizzate dai modelli di apprendimento automatico.
 
 ## Pre-Elaborazione dei dati
@@ -133,7 +133,7 @@ Dalla matrice di correlazione si può notare che la feature "Weight" è altament
 
 ![Distribuzione di Age](img/analisi/distribuzione_age.png)
 
-- La distribuzione è asimmetrica positivamente (right-skewed), con una coda lunga a destra.
+- La distribuzione è asimmetrica positivamente (right-skewed), con una coda lunga a destra. Ciò significa che la maggior parte dei dati è concentrata su valori più bassi di età, mentre alcuni individui hanno età significativamente più elevate.
 - La maggior parte delle osservazioni si trova tra 15 e 30 anni, mostrando una prevalenza giovanile.
 - L'intervallo della distribuzione va da circa 10 a 60 anni, ma la densità si riduce drasticamente dopo i 40 anni, con pochi individui in quella fascia.
 - Non ci sono outlier evidenti.
@@ -142,7 +142,7 @@ Dalla matrice di correlazione si può notare che la feature "Weight" è altament
 
 ![Distribuzione di Height](img/analisi/distribuzione_height.png)
 
-- La distribuzione è asimmetrica positivamente (right-skewed), presenta una coda più lunga a destra.
+- La distribuzione è asimmetrica positivamente (right-skewed), presenta una coda più lunga a destra. Suggerisce che la maggior parte delle osservazioni si trova sulla sinistra, mentre alcuni valori più elevati sono meno frequenti.
 - La maggior parte dei dati sembra concentrarsi intorno a 1.7 metri, il che potrebbe rappresentare un valore medio o mediano.
 - L'intervallo dei dati si estende da circa 1.4 a 2.0 metri, suggerendo una discreta variabilità nelle altezze.
 - Non ci sono evidenti outlier.
@@ -164,7 +164,7 @@ Analizziamo ora la correlazione tra le feature precedenti ("Age", "Weight" e "He
 ![Correlazione Weight e Obesity_Level](img/analisi/corr_WEIGHT_obesity.png)
 ![Correlazione Height e Obesity_Level](img/analisi/corr_HEIGHT_obesity.png)
 
-Possiamo intuire, quindi, che con le feature "Age" e "Weight" riusciamo a classificare in maniera relativamente semplice i livelli di obesità, mentre attraverso la feature "Height" non si riescono a classificare le classi di obesità, perché i boxplot tra i vari livelli di obesità si sovrappongono.
+Possiamo intuire, quindi, che con le feature "Age" e "Weight" si riesce a classificare in maniera relativamente semplice i livelli di obesità, mentre attraverso la feature "Height" non si riescono a classificare le classi di obesità, perché i boxplot tra i vari livelli di obesità si sovrappongono.
 
 Le relazioni tra feature numeriche possono essere analizzate tramite scatter plots o pair plots, questi grafici ci permettono di vedere se esistono pattern lineari o non lineari tra le variabili:
 
@@ -208,13 +208,13 @@ Quindi nella fase di addestramento di modelli supervisionati possiamo non consid
 
 **Feature Rimanenti:**<br>
 Le feature rimanenti ("FCVC", "NCP", "CH2O", "FAF", "TUE") non sembrano avere correlazioni dal punto di vista grafico (i grafici si dimostrano per lo più bilanciati in tutti i casi), ma dal punto di vista logico (in un'analisi realistica) sono fattori estremamente correlati al nostro caso di studio. Come dimostrano i seguenti studi:
-- FCVC: La consumazione frequente di verdure comporta una perdita di peso e un rischio minore di obesità.
-- NCP: Il numero di pasti principali giornalieri incide sul rischio di obesità, chi consuma più di 3 pasti al giorno ha il 32% di probabilità di avere livelli alti di obesità, rispetto a chi ne consuma meno di 3.
-- CH2O: La quantità d'acqua bevuta giornalmente è un fattore correlato al controllo del proprio peso, quindi rilevante al rischio di obesità.
-- FAF: La frequenza di attività fisica è un fattore importante per il rischio di obesità, si dimostra che gli adulti dovrebbero accumulare circa 60 minuti di attività fisica di intensità moderata al giorno per prevenire l'aumento di peso non salutare.
-- TUE: Il tempo trascorso nell'uso di dispositivi tecnologici sembra influire sul rischio di obesità, usare dispositivi tra 1 e 3 ore al giorno, aumenta del 40% il rischio di obesità rispetto ad usarli per meno di un'ora.
+- FCVC: La consumazione frequente di verdure comporta una perdita di peso e un rischio minore di obesità ([paper correlato](https://pmc.ncbi.nlm.nih.gov/articles/PMC6266069/#:~:text=Increased%20vegetable%20intake%20was%20also,to%200.88%20in%20other%20studies.)).
+- NCP: Il numero di pasti principali giornalieri incide sul rischio di obesità, chi consuma più di 3 pasti al giorno ha il 32% di probabilità di avere livelli alti di obesità, rispetto a chi ne consuma meno di 3([paper correlato](https://pubmed.ncbi.nlm.nih.gov/38479908/)).
+- CH2O: La quantità d'acqua bevuta giornalmente è un fattore correlato al controllo del proprio peso, quindi rilevante al rischio di obesità([paper correlato](https://pmc.ncbi.nlm.nih.gov/articles/PMC11045127/#:~:text=Consistent%20with%20our%20finding%20of,glasses%2Fday%20%5B22%5D.)).
+- FAF: La frequenza di attività fisica è un fattore importante per il rischio di obesità, si dimostra che gli adulti dovrebbero accumulare circa 60 minuti di attività fisica di intensità moderata al giorno per prevenire l'aumento di peso non salutare([paper correlato](https://pmc.ncbi.nlm.nih.gov/articles/PMC3715111/?utm_source=chatgpt.com)).
+- TUE: Il tempo trascorso nell'uso di dispositivi tecnologici sembra influire sul rischio di obesità, usare dispositivi tra 1 e 3 ore al giorno, aumenta del 40% il rischio di obesità rispetto ad usarli per meno di un'ora([paper correlato](https://pmc.ncbi.nlm.nih.gov/articles/PMC9714705/#:~:text=It%20shows%20that%20spending%201,%25%20CI%201.19%2C%201.65)).
 
-Dopo l'eliminazione delle feature non correlate e basandoci sulla conoscenza del dominio, possiamo creare nuove feature che catturano relazioni nascoste nei dati. Ad esempio:
+Dopo l'eliminazione delle feature non correlate e basandosi sulla conoscenza del dominio, possiamo creare nuove feature che catturano relazioni nascoste nei dati. Ad esempio:
 
 - **BMI (Body Mass Index, o IMC, Indice di Massa Corporea):**
   $$
@@ -547,9 +547,7 @@ Un approccio possibile potrebbe essere effettuato tramite:
 2. Acquisizione e Integrazione dei Dati:
     - **Fonti di Dati:** Database pubblici (es. ISTAT, Eurostat), API di servizi web (es. Google Maps, OpenWeatherMap), studi scientifici, ecc.
     - **Tecniche di Integrazione:** Data linkage, data fusion, data augmentation.
-
-    3. Analisi delle Relazioni tra Feature:
-
+3. Analisi delle Relazioni tra Feature:
     - **Tecniche di Machine Learning:** Feature selection, feature extraction, dimensionality reduction.
     - **Modelli Statistici:** Regressione multipla, analisi della varianza, analisi fattoriale.
     - **Visualizzazione dei Dati:** Grafici interattivi, mappe di calore, network graphs.
