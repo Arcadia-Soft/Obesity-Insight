@@ -93,7 +93,22 @@ obesity_insight/
 git clone https://github.com/yourusername/obesity-insight.git
 ```
 
-2. Installa le dipendenze richieste
+2. Sposta nella directory del progetto
+```bash
+cd obesity-insight
+```
+
+3. Crea un ambiente virtuale
+```bash
+python -m venv venv
+```
+
+4. Attiva l'ambiente virtuale
+```bash
+source venv/bin/activate
+```
+
+5. Installa le dipendenze richieste
 ```bash
 pip install -r requirements.txt
 ```
