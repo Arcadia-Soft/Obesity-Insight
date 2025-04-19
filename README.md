@@ -1,4 +1,4 @@
-# Obesity Insight
+a# Obesity Insight
 
 ## Introduzione
 Questo repository raccoglie il progetto realizzato per il corso di ICON 2024/2025 presso l'Università degli Studi di Bari Aldo Moro.
@@ -104,9 +104,14 @@ python -m venv venv
 ```
 
 4. Attiva l'ambiente virtuale
-```bash
-source venv/bin/activate
-```
+   - Windows
+   ```bash
+   venv/scripts/activate
+   ```
+   - Linux/MacOS
+   ```bash
+   source venv/bin/activate
+   ```
 
 5. Installa le dipendenze richieste
 ```bash
