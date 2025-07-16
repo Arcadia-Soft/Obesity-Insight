@@ -1,4 +1,4 @@
-a# Obesity Insight
+# Obesity Insight
 
 ## Introduzione
 Questo repository raccoglie il progetto realizzato per il corso di ICON 2024/2025 presso l'Università degli Studi di Bari Aldo Moro.
